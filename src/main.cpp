@@ -6,9 +6,10 @@
 
 int main(int argc, char const *argv[])
 {
-    std::string s;
-    cin >> s;
-    std::cout << calculator(s);
+    Bignumber a("13");
+    Bignumber b("27");
+
+    (a+b).out();
 
 }
 

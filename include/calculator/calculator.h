@@ -64,6 +64,7 @@ inline int calculator(const std::string & s)
 
             for(;i<s.size() &&  (isdigit(s[i]) || s[i] == '.');i++)  x+=s[i];
             i--;
+            //TODO need protect
             num.push(stod(x));
         }
     }
