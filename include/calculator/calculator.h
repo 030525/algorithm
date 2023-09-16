@@ -13,15 +13,15 @@ inline int priority(char x)
     return 0;
 }
 
-inline static void calculate_once(stack<char> & ops,stack<double> & num )
+inline static void calculate_once(stack<char> & ops,stack<int> & num )
 {
-    double n = num.top();
+    int n = num.top();
     num.pop();
 
     char x = ops.top();
     ops.pop();
 
-    double n1 = num.top();
+    int n1 = num.top();
     num.pop();
 
     if(x == '+') n = n + n1;
@@ -32,11 +32,11 @@ inline static void calculate_once(stack<char> & ops,stack<double> & num )
     num.push(n);
 }
 
-inline double calculator(const std::string & s)
+inline int calculator(const std::string & s)
 {
 
     stack<char> ops;
-    stack<double> num;
+    stack<int> num;
 
     for(int i = 0;i < s.size();i++)
     {
@@ -44,9 +44,7 @@ inline double calculator(const std::string & s)
         else if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/') 
         {
             //comapre priority 
-            //TODO debug , when first ops has no compare
-            char last = ops.top();
-            if(priority(s[i]) <= priority(last))
+            while(ops.size() && priority(s[i]) <= priority(ops.top()))
             {
                 calculate_once(ops,num);
             }
@@ -71,7 +69,6 @@ inline double calculator(const std::string & s)
     }
 
 
-    //TODO need calculate rest
     while(num.size() != 1)
     {
         calculate_once(ops,num);
