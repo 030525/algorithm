@@ -9,8 +9,27 @@ using namespace std;
 inline int priority(char x)
 {
     if (x == '*' || x == '/') return 2;
-    
-    return 1;
+    else if(x == '+' || x == '-') return 1;
+    return 0;
+}
+
+inline static void calculate_once(stack<char> & ops,stack<double> & num )
+{
+    double n = num.top();
+    num.pop();
+
+    char x = ops.top();
+    ops.pop();
+
+    double n1 = num.top();
+    num.pop();
+
+    if(x == '+') n = n + n1;
+    else if(x == '-') n = n1 - n;
+    else if(x == '*') n = n * n1;
+    else if(x == '/') n = n1 / n;
+
+    num.push(n);
 }
 
 inline double calculator(const std::string & s)
@@ -21,35 +40,24 @@ inline double calculator(const std::string & s)
 
     for(int i = 0;i < s.size();i++)
     {
-        if(s[i] == '(');
-        //TODO debug
-        else if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/') ops.push(s[i]);
+        if(s[i] == '(') ops.push(s[i]);
+        else if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/') 
+        {
+            //comapre priority 
+            //TODO debug , when first ops has no compare
+            char last = ops.top();
+            if(priority(s[i]) <= priority(last))
+            {
+                calculate_once(ops,num);
+            }
+
+            ops.push(s[i]);
+        }
         else if(s[i] == ')')
         {
-            //calculate with priority
-            char x = ops.top();
-            double n = num.top();
-
-            //compare priority big for put,equal for calculate
-            if(priority(s[i]) > priority(x))
-            {
-                ops.push(s[i]);
-            }
-            else
-            {
-                ops.pop();
-                num.pop();
-
-                if(x == '+') n = n + num.top();
-                else if(x == '-') n = num.top() - n;
-                else if(x == '*') n = n * num.top();
-                else if(x == '/') n = num.top() / n;
-
-
-                num.pop();
-                num.push(n);
-            }
-
+            //calculator until last '('
+            while(ops.top() != '(') calculate_once(ops,num);
+            ops.pop();
         }
         else
         {
@@ -66,22 +74,7 @@ inline double calculator(const std::string & s)
     //TODO need calculate rest
     while(num.size() != 1)
     {
-        double n = num.top();
-        num.pop();
-
-        char x = ops.top();
-        ops.pop();
-
-        double n1 = num.top();
-        num.pop();
-
-        if(x == '+') n = n + n1;
-        else if(x == '-') n = n1 - n;
-        else if(x == '*') n = n * n1;
-        else if(x == '/') n = n1 / n;
-
-        num.push(n);
-
+        calculate_once(ops,num);
     }
 
     return num.top();

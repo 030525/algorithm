@@ -1,7 +1,7 @@
 set auto-load safe-path /
 
 
-b calculator.h:24
+b calculator.h:43
 
 define di
     display ops
