@@ -28,12 +28,6 @@ void merge(int lo,int hi,std::vector<int> & v)
         a[i - lo] = v[i];
     }
     
-#ifdef DEBUG
-    output(a);
-#endif
-    //TODO double pointerq
-    // mapping a to v
-
     int l = 0,mid = l + (a.size() - 1 - l) / 2,r = mid + 1;
     int index = lo;
 
@@ -55,15 +49,11 @@ void merge(int lo,int hi,std::vector<int> & v)
     }
 
     //dispose rest of l or r
-#ifdef DEBUG
-    output(v);
-#endif
+
     while(l <= mid){v[index++] = a[l++];}
     while(r < a.size()){v[index++] = a[r++];}
 
-#ifdef DEBUG
-    std::cout << "  ";output(v);
-#endif
+
 }
 
 #endif
