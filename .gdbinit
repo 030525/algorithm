@@ -1,12 +1,9 @@
 set auto-load safe-path /
 
-
-b main1.cpp:99 if is_balance == true
+b main1.cpp:39
+b main1.cpp:56
 
 define di
-    display i.first
-    display i.second
-    display _break
-    display is_balance
-    display min_step
+    display base
+    display count
 end

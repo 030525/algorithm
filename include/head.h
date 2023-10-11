@@ -5,7 +5,7 @@
 #include "sort/merge_sort.h"
 #include "sort/quick_sort.h"
 #include "calculator/calculator.h"
-//#include "calculator/bignumber.h"
+#include "algorithm.h"
 #include "myfunc.h"
 
 #endif

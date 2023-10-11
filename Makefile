@@ -4,7 +4,7 @@
 #
 
 # define the Cpp compiler to use
-CXX = g++
+CXX = g++ 
 
 # define any compile-time flags
 CXXFLAGS	:= -std=c++17 -Wall -Wextra -g 
@@ -68,6 +68,7 @@ DEPS		:= $(OBJECTS:.o=.d)
 OUTPUTMAIN	:= $(call FIXPATH,$(OUTPUT)/$(MAIN))
 
 all: $(OUTPUT) $(MAIN)
+	make clean
 	@echo Executing 'all' complete!
 
 $(OUTPUT):
@@ -89,9 +90,9 @@ $(MAIN): $(OBJECTS)
 
 .PHONY: clean
 clean:
-	$(RM) $(OUTPUTMAIN)
-	$(RM) $(call FIXPATH,$(OBJECTS))
-	$(RM) $(call FIXPATH,$(DEPS))
+
+	@$(RM) $(call FIXPATH,$(OBJECTS))
+	@$(RM) $(call FIXPATH,$(DEPS))
 	@echo Cleanup complete!
 
 run: all

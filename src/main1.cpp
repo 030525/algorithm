@@ -1,5 +1,8 @@
 #if 1
 #define DEBUG
+#include "../include/head.h"
+using namespace std;
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -9,134 +12,43 @@ string rtrim(const string &);
 vector<string> split(const string &);
 
 /*
- * Complete the 'formingMagicSquare' function below.
+ * Complete the 'nonDivisibleSubset' function below.
  *
  * The function is expected to return an INTEGER.
- * The function accepts 2D_INTEGER_ARRAY s as parameter.
+ * The function accepts following parameters:
+ *  1. INTEGER k
+ *  2. INTEGER_ARRAY s
  */
- 
-inline void insert(map<int, int> & map,int value)
-{
-    auto find = map.find(value);
-    
-    if(find == map.end()) map.insert({value,1});
-    else find->second++;
-}
 
-void debug(map<pair<int,int>,std::vector<std::vector<int>::iterator>> & map)
-{
-    for(auto & i : map)
-    {
-        cout << i.first.first << " , " << i.first.second << " : ";
-        for(auto & j : i.second)
-        {
-            cout << *j << " ";
-        }
-        cout << "\n";
-    }
-}
 
-int formingMagicSquare(vector<vector<int>> s) {
-
-    // col , row vector
-    int size = s.size();
-
-    int magic = size * (size * size + 1) / 2;
-
-    vector<int> col(size,0),row(size,0),down(1,0),up(1,0);
-
-    map<pair<int,int>,std::vector<std::vector<int>::iterator>> _map;
-
-    //get down up
-    for(int i = 0;i < size;i++)
-    {
-        down[0] += s[i][i];
-        up[0] += s[size-i-1][i];
-    }
-
-    //get all col , row
-    for(int i = 0;i < size;i++)
-    {
-        for(int j = 0;j < size;j++)
-        {
-            row[i] += s[i][j];
-            col[j] += s[i][j];
-            
-            //connect every point to line
-            vector< std::vector<int>::iterator> line;
-            if(i == j) line.push_back(down.begin());
-            if(i + j == size-1)  line.push_back(up.begin());
-
-            line.push_back(row.begin() + i);
-            line.push_back(col.begin() + j);
-
-            _map.insert({{i,j},line});
-        }
-    }
-
-    //find the most balance point`s value
-    debug(_map);
-
-    int min_step = 0;
-
-    while(true)
-    {
-        debug(_map);
-        bool _break = true;
-        for(auto & i : _map)
-        {
-            bool is_balance = true;
-            for(int j = 1;j < i.second.size();j++)
-            {
-                if(*i.second[j] != *i.second[j-1])
-                {
-                    is_balance = false;
-                    _break = false;
-                    break;
-                }
-            }
-
-            if(is_balance)
-            {
-                min_step += fabs(magic - *i.second[0]);
-                for(auto j : i.second)
-                {
-                    *j += (magic - *j) ;
-                }
-            }
-        }
-
-        if(_break) break;
-    }
-
-    
-    return min_step;
-
-    
-}
 
 int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
 
-    vector<vector<int>> s(3);
+    string first_multiple_input_temp;
+    getline(cin, first_multiple_input_temp);
 
-    for (int i = 0; i < 3; i++) {
-        s[i].resize(3);
+    vector<string> first_multiple_input = split(rtrim(first_multiple_input_temp));
 
-        string s_row_temp_temp;
-        getline(cin, s_row_temp_temp);
+    int n = stoi(first_multiple_input[0]);
 
-        vector<string> s_row_temp = split(rtrim(s_row_temp_temp));
+    int k = stoi(first_multiple_input[1]);
 
-        for (int j = 0; j < 3; j++) {
-            int s_row_item = stoi(s_row_temp[j]);
+    string s_temp_temp;
+    getline(cin, s_temp_temp);
 
-            s[i][j] = s_row_item;
-        }
+    vector<string> s_temp = split(rtrim(s_temp_temp));
+
+    vector<int> s(n);
+
+    for (int i = 0; i < n; i++) {
+        int s_item = stoi(s_temp[i]);
+
+        s[i] = s_item;
     }
 
-    int result = formingMagicSquare(s);
+    int result = nonDivisibleSubset(k, s);
 
     fout << result << "\n";
 
