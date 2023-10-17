@@ -1,20 +1,21 @@
-#if 0
+#if 1
 #define DEBUG
 #include "../include/head.h"
+#include "../include/work/HammingCode/hamming.h"
+using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    int a;
-    int b;
-    cin >> a >> b;
+    int num;
+    cin >> num;
 
-    auto a1 = to_deque(a);
-    auto b1 = to_deque(b);
+    auto a = to_hamming(to_deque(num));
 
-    mul(a1,b1);
-
-
-    //many_mul_unit(a1,b);
+    for(auto & i : a)
+    {
+        std::cout << i << " " ;
+    }
+    std::cout << std::endl;
 
     return 0;
 }

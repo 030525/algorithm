@@ -12,7 +12,7 @@ CXXFLAGS	:= -std=c++17 -Wall -Wextra -g
 # define library paths in addition to /usr/lib
 #   if I wanted to include libraries not in /usr/lib I'd specify
 #   their path using -Lpath, something like:
-LFLAGS = -lbenchmark
+LFLAGS = -lbenchmark -lgtest
 
 # define output directory
 OUTPUT	:= output
@@ -97,4 +97,3 @@ clean:
 
 run: all
 	./$(OUTPUTMAIN)
-	@echo Executing 'run: all' complete!

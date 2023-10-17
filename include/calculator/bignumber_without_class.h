@@ -4,7 +4,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-deque<char> to_deque(int num) 
+static deque<char> to_deque(int num) 
 {
     // number 123 to deque:3 2 1
     deque<char> ret;

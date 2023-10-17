@@ -1,4 +1,4 @@
-#if 1
+#if 0
 #define DEBUG
 #include "../include/head.h"
 using namespace std;
