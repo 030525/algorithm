@@ -1,23 +1,36 @@
-#if 1
+#if 0
 #define DEBUG
 #include "../include/head.h"
 #include "../include/work/HammingCode/hamming.h"
 using namespace std;
 
+void a(int a)
+{
+    while (true)
+    {
+        /* code */
+    }
+    
+}
+
+
+void func()
+{
+    int b = 12;
+
+    a(b);
+    
+}
+
 int main(int argc, char const *argv[])
 {
-    int num;
-    cin >> num;
+    int a = 1;
+    int b = 2;
 
-    auto a = to_hamming(to_deque(num));
+    int c = a +b;
 
-    for(auto & i : a)
-    {
-        std::cout << i << " " ;
-    }
-    std::cout << std::endl;
-
-    return 0;
+    func();
+    
 }
 
 

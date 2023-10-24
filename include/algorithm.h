@@ -3,49 +3,42 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//TODO debug
-int nonDivisibleSubset(int k, vector<int> s) {
-    // eliminate multiple
-    set<int> set(s.begin(),s.end());
 
-    // max count
-    int count = INT32_MIN;
+/*
+*   description :
+*   start  date :
+*   finish date :
+*
+*/
 
-    // find a base must included
-    for(auto & i : set)
+
+long get_all(vector<long> & dp,vector<long> &c,int n)
+{
+    if(n < 0 ) return 0;
+    if(n == 0) return 1;
+
+    if(dp[n]) return dp[n];
+
+    int all = 0;
+
+    for(auto & i : c)
     {
-        deque<int> temp(1,i);
-
-        for(auto & j : s)
-        {
-            if(j == i) continue;
-            else
-            {
-                bool good = true;
-
-                for(auto & m : temp)
-                {
-                    if((m + j) % k == 0)
-                    {
-                        good = false;
-                        break;
-                    }
-                }
-
-                if(good) temp.push_back(j);
-            }
-        }
-
-        if(temp.size() > count) count = temp.size();
+        all += get_all(dp,c,n-i);
     }
 
+    return dp[n] = all;
 
-#ifdef DEBUG
-    cout << "count = " << count;
-#endif
+}
 
-    return count;  
-    
+long getWays(int n, vector<long> c) 
+{
+    vector<long> dp(n+1,0);
+
+    int ret = 0;
+
+    ret += get_all(dp,c,n);
+
+    return ret;
 }
 
 #endif

@@ -1,4 +1,4 @@
-#if 0
+#if 1
 #define DEBUG
 #include "../include/head.h"
 using namespace std;
@@ -12,12 +12,12 @@ string rtrim(const string &);
 vector<string> split(const string &);
 
 /*
- * Complete the 'nonDivisibleSubset' function below.
+ * Complete the 'getWays' function below.
  *
- * The function is expected to return an INTEGER.
+ * The function is expected to return a LONG_INTEGER.
  * The function accepts following parameters:
- *  1. INTEGER k
- *  2. INTEGER_ARRAY s
+ *  1. INTEGER n
+ *  2. LONG_INTEGER_ARRAY c
  */
 
 
@@ -33,24 +33,26 @@ int main()
 
     int n = stoi(first_multiple_input[0]);
 
-    int k = stoi(first_multiple_input[1]);
+    int m = stoi(first_multiple_input[1]);
 
-    string s_temp_temp;
-    getline(cin, s_temp_temp);
+    string c_temp_temp;
+    getline(cin, c_temp_temp);
 
-    vector<string> s_temp = split(rtrim(s_temp_temp));
+    vector<string> c_temp = split(rtrim(c_temp_temp));
 
-    vector<int> s(n);
+    vector<long> c(m);
 
-    for (int i = 0; i < n; i++) {
-        int s_item = stoi(s_temp[i]);
+    for (int i = 0; i < m; i++) {
+        long c_item = stol(c_temp[i]);
 
-        s[i] = s_item;
+        c[i] = c_item;
     }
 
-    int result = nonDivisibleSubset(k, s);
+    // Print the number of ways of making change for 'n' units using coins having the values given by 'c'
 
-    fout << result << "\n";
+    long ways = getWays(n, c);
+
+    fout << ways << "\n";
 
     fout.close();
 

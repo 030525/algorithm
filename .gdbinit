@@ -1,9 +1,27 @@
 set auto-load safe-path /
 
-b main1.cpp:39
-b main1.cpp:56
+set print pretty on
 
-define di
-    display base
-    display count
+layout src
+
+b algorithm.h:17
+
+run ./output/main < input
+
+
+
+define n
+    next
+    info args
+    info locals
+
 end
+
+define c
+    continue
+    info args
+    info locals
+
+end
+
+
