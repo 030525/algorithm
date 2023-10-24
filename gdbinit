@@ -1,35 +1,3 @@
-set auto-load safe-path /
-
-set print pretty on
-
-layout src
-
-b algorithm.h:27
-
-define r
-    run ./output/main < input
-    info args
-    info locals
-end
-
-
-
-define n
-    next
-    info args
-    info locals
-
-end
-
-define c
-    continue
-    info args
-    info locals
-
-end
-
-
-
 #                                                                                                        
 #   STL GDB evaluators/views/utilities - 1.03
 #
@@ -724,5 +692,3 @@ set print vtbl on
 set print demangle on
 set demangle-style gnu-v3
 set print sevenbit-strings off
-
-
